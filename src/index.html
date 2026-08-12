@@ -1,23 +1,344 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
-    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Відлік до Барселони</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <load src="./partials/header.html" icon-path="img/sprite.svg#logo" />
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a href="#home" class="logo">
+          <span class="logo__icon">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2.5 2v1.5L12 21l4.5 1.5V21L14 19v-5.5l7 2.5z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+          <span class="logo__text">
+            <span class="logo__eyebrow">Відлік до</span>
+            <span class="logo__title">БАРСЕЛОНИ</span>
+          </span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Відкрити меню"
+          aria-expanded="false"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M3 6h18M3 12h18M3 18h18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+
+        <nav class="main-nav" id="mainNav">
+          <a href="#home" class="main-nav__link is-active">Головна</a>
+          <a href="#plan" class="main-nav__link">План</a>
+          <a href="#checklist" class="main-nav__link">Чек-лист</a>
+          <a href="#goals" class="main-nav__link">Цілі</a>
+          <a href="#notes" class="main-nav__link">Нотатки</a>
+        </nav>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Перемкнути тему"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
 
     <main>
-      <!-- Loads the specified .html file -->
-      <load src="./partials/vite-promo.html" />
-      <load src="./partials/badges.html" />
+      <!-- ===== HERO ===== -->
+      <section class="hero" id="home">
+        <div class="hero__bg" aria-hidden="true"></div>
+        <div class="hero__overlay" aria-hidden="true"></div>
+
+        <p class="hero__note">
+          Нове життя<br />починається<br />з рішення.
+          <span class="hero__note-heart">♡</span>
+        </p>
+
+        <div class="hero__orbit" aria-hidden="true">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+            <circle
+              cx="60"
+              cy="60"
+              r="52"
+              stroke="rgba(255,255,255,0.35)"
+              stroke-width="1"
+              stroke-dasharray="3 6"
+            />
+          </svg>
+          <span class="hero__plane">✈</span>
+        </div>
+
+        <div class="hero__content">
+          <p class="hero__eyebrow">До вильоту в</p>
+          <h1 class="hero__title">
+            Барселону <span class="hero__heart">♡</span>
+          </h1>
+
+          <div class="countdown" id="countdown">
+            <div class="countdown__unit">
+              <span class="countdown__value" id="cd-days">128</span>
+              <span class="countdown__label">днів</span>
+            </div>
+            <span class="countdown__sep">:</span>
+            <div class="countdown__unit">
+              <span class="countdown__value" id="cd-hours">14</span>
+              <span class="countdown__label">годин</span>
+            </div>
+            <span class="countdown__sep">:</span>
+            <div class="countdown__unit">
+              <span class="countdown__value" id="cd-minutes">08</span>
+              <span class="countdown__label">хвилин</span>
+            </div>
+            <span class="countdown__sep">:</span>
+            <div class="countdown__unit">
+              <span class="countdown__value" id="cd-seconds">52</span>
+              <span class="countdown__label">секунд</span>
+            </div>
+          </div>
+
+          <div class="route">
+            <span class="route__item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2.5 2v1.5L12 21l4.5 1.5V21L14 19v-5.5l7 2.5z"
+                  fill="currentColor"
+                />
+              </svg>
+              Кишинів (RMO)
+            </span>
+            <span class="route__arrow">→</span>
+            <span class="route__item">Барселона (BCN)</span>
+            <span class="route__divider"></span>
+            <span class="route__date">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="3"
+                  y="5"
+                  width="18"
+                  height="16"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M3 10h18M8 3v4M16 3v4"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+              </svg>
+              27 листоп. 2027
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== STAT CARDS ===== -->
+      <section class="stats" id="goals">
+        <article class="card stat-card">
+          <div class="stat-card__head">
+            <h3 class="stat-card__title">Прогрес накопичень</h3>
+            <span class="stat-card__icon stat-card__icon--pink">€</span>
+          </div>
+          <p class="stat-card__value">
+            6 100 € <span class="stat-card__of">із 10 000 €</span>
+          </p>
+          <div class="progress">
+            <div
+              class="progress__bar progress__bar--pink"
+              style="--value: 61%"
+            ></div>
+          </div>
+          <span class="progress__pct">61%</span>
+        </article>
+
+        <article class="card stat-card">
+          <div class="stat-card__head">
+            <h3 class="stat-card__title">GoIT Fullstack</h3>
+            <span class="stat-card__icon stat-card__icon--blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="3"
+                  y="4"
+                  width="18"
+                  height="12"
+                  rx="1.5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M2 20h20"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+          </div>
+          <p class="stat-card__value">75%</p>
+          <p class="stat-card__meta">JS • React • TS</p>
+          <div class="progress">
+            <div
+              class="progress__bar progress__bar--blue"
+              style="--value: 75%"
+            ></div>
+          </div>
+        </article>
+
+        <article class="card stat-card">
+          <div class="stat-card__head">
+            <h3 class="stat-card__title">Рівень англійської</h3>
+            <span class="stat-card__icon stat-card__icon--yellow">Aa</span>
+          </div>
+          <p class="stat-card__value">B1</p>
+          <p class="stat-card__meta">Ціль: B2</p>
+          <div class="progress">
+            <div
+              class="progress__bar progress__bar--yellow"
+              style="--value: 55%"
+            ></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ===== CHECKLIST + WEATHER ===== -->
+      <section class="panels" id="plan">
+        <article class="card panel" id="checklist">
+          <h3 class="panel__title">Чек-лист переїзду</h3>
+
+          <ul class="checklist" id="checklistItems">
+            <li class="checklist__item">
+              <label>
+                <input type="checkbox" checked />
+                <span class="checklist__box"></span>
+                <span class="checklist__text">Оформити візу</span>
+              </label>
+            </li>
+            <li class="checklist__item">
+              <label>
+                <input type="checkbox" checked />
+                <span class="checklist__box"></span>
+                <span class="checklist__text">Знайти житло</span>
+              </label>
+            </li>
+            <li class="checklist__item">
+              <label>
+                <input type="checkbox" />
+                <span class="checklist__box"></span>
+                <span class="checklist__text">Оформити страховку</span>
+              </label>
+            </li>
+            <li class="checklist__item">
+              <label>
+                <input type="checkbox" />
+                <span class="checklist__box"></span>
+                <span class="checklist__text">Відкрити рахунок у банку</span>
+              </label>
+            </li>
+            <li class="checklist__item">
+              <label>
+                <input type="checkbox" />
+                <span class="checklist__box"></span>
+                <span class="checklist__text">Купити квиток</span>
+              </label>
+            </li>
+          </ul>
+
+          <a href="#checklist" class="panel__link"
+            >Показати весь список <span aria-hidden="true">→</span></a
+          >
+
+          <div class="panel__media panel__media--city" aria-hidden="true"></div>
+        </article>
+
+        <article class="card panel">
+          <h3 class="panel__title">Погода в Барселоні</h3>
+
+          <div class="weather">
+            <span class="weather__icon">☀</span>
+            <div>
+              <p class="weather__temp">28°C</p>
+              <p class="weather__desc">Сонячно</p>
+            </div>
+          </div>
+
+          <div class="weather__grid">
+            <div>
+              <p class="weather__label">Вологість</p>
+              <p class="weather__stat">62%</p>
+            </div>
+            <div>
+              <p class="weather__label">Вітер</p>
+              <p class="weather__stat">9 км/год</p>
+            </div>
+            <div>
+              <p class="weather__label">Відчувається як</p>
+              <p class="weather__stat">29°C</p>
+            </div>
+          </div>
+
+          <a href="#plan" class="panel__link"
+            >Дивитись на карті <span aria-hidden="true">→</span></a
+          >
+
+          <div
+            class="panel__media panel__media--beach"
+            aria-hidden="true"
+          ></div>
+        </article>
+      </section>
+
+      <!-- ===== QUOTE ===== -->
+      <section class="quote" id="notes">
+        <div class="card quote__card">
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          <p class="quote__text">
+            Кожен день наближає тебе до життя, про яке ти мрієш.
+          </p>
+          <span class="quote__heart" aria-hidden="true">♡</span>
+        </div>
+      </section>
     </main>
 
-    <load src="./partials/footer.html" />
+    <footer class="site-footer">
+      <p>Зроблено з ♡ на шляху до нового життя</p>
+    </footer>
 
-    <script type="module" src="./main.js"></script>
+    <script src="./main.js"></script>
   </body>
 </html>
