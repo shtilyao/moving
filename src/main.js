@@ -6,7 +6,7 @@
   'use strict';
 
   /* ---------- Відлік часу до вильоту ---------- */
-  const TARGET_DATE = new Date('2026-10-18T12:05:00');
+  const TARGET_DATE = new Date('2026-10-17T00:00:00');
 
   const els = {
     days: document.getElementById('cd-days'),
