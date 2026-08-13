@@ -1,7 +1,6 @@
-document.documentElement.style.setProperty(
-  '--hero-bg-url',
-  `url(${import.meta.env.BASE_URL}img/hero-sagrada.jpg)`
-);
+import heroSagradaUrl from '../img/hero-sagrada.jpg';
+
+document.documentElement.style.setProperty('--hero-bg-url', `url(${heroSagradaUrl})`);
 
 import '../scss/styles.scss';
 
