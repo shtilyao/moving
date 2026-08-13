@@ -34,13 +34,29 @@ export function renderStats(state) {
   document.getElementById('englishBar').style.setProperty('--value', english.percent + '%');
 }
 
-export function renderWeather(state) {
-  const w = state.weather;
-  document.getElementById('weatherTemp').textContent = w.temp;
-  document.getElementById('weatherDesc').textContent = w.desc;
-  document.getElementById('weatherHumidity').textContent = w.humidity;
-  document.getElementById('weatherWind').textContent = w.wind;
-  document.getElementById('weatherFeels').textContent = w.feels;
+export function renderWeatherLive(weather) {
+  document.getElementById('weatherIcon').textContent = weather.icon;
+  document.getElementById('weatherTemp').textContent = weather.temp;
+  document.getElementById('weatherDesc').textContent = weather.desc;
+  document.getElementById('weatherHumidity').textContent = weather.humidity;
+  document.getElementById('weatherWind').textContent = weather.wind;
+  document.getElementById('weatherFeels').textContent = weather.feels;
+
+  const updatedEl = document.getElementById('weatherUpdated');
+  if (updatedEl) {
+    const time = weather.fetchedAt.toLocaleTimeString('uk-UA', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    updatedEl.textContent = `Оновлено о ${time}`;
+  }
+}
+
+export function renderWeatherError() {
+  const updatedEl = document.getElementById('weatherUpdated');
+  if (updatedEl) {
+    updatedEl.textContent = 'Не вдалося оновити погоду';
+  }
 }
 
 export function renderQuote(state) {
@@ -76,7 +92,6 @@ export function renderChecklist(state, { unlocked, onToggle, onRemove }) {
 export function renderAll(state, handlers) {
   renderRoute(state);
   renderStats(state);
-  renderWeather(state);
   renderQuote(state);
   renderChecklist(state, handlers);
 }

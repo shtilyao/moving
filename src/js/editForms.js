@@ -92,42 +92,6 @@ const FORM_BUILDERS = {
     },
   }),
 
-  weather: (state) => ({
-    fields: `
-      <div class="edit-form__row">
-        <div class="edit-form__field">
-          <label class="edit-form__label">Температура, °C</label>
-          <input type="number" name="temp" value="${state.weather.temp}" required>
-        </div>
-        <div class="edit-form__field">
-          <label class="edit-form__label">Опис</label>
-          <input name="desc" value="${escAttr(state.weather.desc)}" required>
-        </div>
-      </div>
-      <div class="edit-form__row">
-        <div class="edit-form__field">
-          <label class="edit-form__label">Вологість, %</label>
-          <input type="number" min="0" max="100" name="humidity" value="${state.weather.humidity}">
-        </div>
-        <div class="edit-form__field">
-          <label class="edit-form__label">Вітер, км/год</label>
-          <input type="number" min="0" name="wind" value="${state.weather.wind}">
-        </div>
-        <div class="edit-form__field">
-          <label class="edit-form__label">Відчувається як, °C</label>
-          <input type="number" name="feels" value="${state.weather.feels}">
-        </div>
-      </div>
-    `,
-    apply: (form, draft) => {
-      draft.weather.temp = Number(form.temp.value) || 0;
-      draft.weather.desc = form.desc.value.trim();
-      draft.weather.humidity = clamp(Number(form.humidity.value) || 0, 0, 100);
-      draft.weather.wind = Number(form.wind.value) || 0;
-      draft.weather.feels = Number(form.feels.value) || 0;
-    },
-  }),
-
   quote: (state) => ({
     fields: `
       <div class="edit-form__field">

@@ -59,8 +59,7 @@ export async function restoreSession() {
       lock();
     }
   } catch {
-    // Немає з'єднання — залишаємо як є, спробуємо пізніше при реальному запиті.
-    unlocked = true;
+    unlocked = false;
     notify();
   }
 }

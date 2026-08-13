@@ -7,7 +7,8 @@ import '../scss/styles.scss';
 import { loadInitialState, onStateChange, saveState, subscribeRealtime, getState } from './store.js';
 import { isUnlocked, onAuthChange, restoreSession, lock } from './auth.js';
 import { openPasswordModal } from './passwordModal.js';
-import { renderAll } from './render.js';
+import { renderAll, renderWeatherLive, renderWeatherError } from './render.js';
+import { fetchBarcelonaWeather } from './weather.js';
 import { startCountdown, setCountdownTarget } from './countdown.js';
 import { showToast } from './toast.js';
 import { openEditForm } from './editForms.js';
@@ -225,3 +226,19 @@ if (sections.length && navLinks.length && 'IntersectionObserver' in window) {
 
   sections.forEach((section) => observer.observe(section));
 }
+
+/* ---------------------------------------------------------------------- */
+/* Погода: живі дані з Open-Meteo, оновлення раз на 30 хвилин             */
+/* ---------------------------------------------------------------------- */
+
+async function refreshWeather() {
+  try {
+    const weather = await fetchBarcelonaWeather();
+    renderWeatherLive(weather);
+  } catch {
+    renderWeatherError();
+  }
+}
+
+refreshWeather();
+setInterval(refreshWeather, 30 * 60 * 1000);
