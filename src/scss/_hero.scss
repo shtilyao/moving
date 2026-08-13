@@ -1,0 +1,213 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.hero {
+  position: relative;
+  max-width: v.$container-max;
+  margin: 24px auto 0;
+  padding: 90px 40px 70px;
+  border-radius: v.$radius-lg;
+  overflow: hidden;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  isolation: isolate;
+
+  @include m.respond(tablet) {
+    margin: 16px 16px 0;
+    padding: 60px 20px 50px;
+    min-height: 460px;
+    border-radius: v.$radius-md;
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: var(--hero-bg-url);
+    background-size: cover;
+    background-position: center 38%;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(0deg, rgba(9, 10, 16, 0.82) 0%, rgba(9, 10, 16, 0.1) 40%, rgba(9, 10, 16, 0.3) 100%),
+      linear-gradient(90deg, rgba(9, 10, 16, 0.4) 0%, transparent 28%, transparent 72%, rgba(9, 10, 16, 0.4) 100%);
+  }
+
+  &__note {
+    align-self: flex-start;
+    font-family: v.$font-hand;
+    font-size: 1.6rem;
+    line-height: 1.15;
+    color: v.$color-accent-pink;
+    transform: rotate(-4deg);
+    margin: 0 0 30px 4px;
+
+    @include m.respond(tablet) {
+      display: none;
+    }
+
+    &-heart {
+      display: inline-block;
+    }
+  }
+
+  &__orbit {
+    position: absolute;
+    top: 60px;
+    right: 90px;
+    width: 120px;
+    height: 120px;
+
+    @include m.respond(desktop) {
+      right: 40px;
+    }
+
+    @include m.respond(tablet) {
+      display: none;
+    }
+  }
+
+  &__plane {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    font-size: 1.1rem;
+    color: v.$color-text-primary;
+    transform: translateX(-50%) rotate(35deg);
+  }
+
+  &__content {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__eyebrow {
+    font-size: 1.15rem;
+    font-weight: v.$fw-medium;
+    color: v.$color-text-secondary;
+
+    @include m.respond(tablet) {
+      font-size: 1rem;
+    }
+  }
+
+  &__title {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: v.$fw-extrabold;
+    letter-spacing: -0.01em;
+    margin-bottom: 34px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  &__heart {
+    color: v.$color-accent-pink;
+    font-size: 0.6em;
+  }
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(13, 14, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: v.$radius-md;
+  padding: 26px 40px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin-bottom: 30px;
+
+  @include m.respond(tablet) {
+    padding: 16px 18px;
+    gap: 10px;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  &__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 64px;
+  }
+
+  &__value {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: v.$fw-bold;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__label {
+    margin-top: 4px;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: v.$color-text-secondary;
+  }
+
+  &__sep {
+    font-size: 1.8rem;
+    font-weight: v.$fw-regular;
+    color: v.$color-text-muted;
+    transform: translateY(-8px);
+
+    @include m.respond(tablet) {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: v.$color-text-primary;
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: v.$fw-medium;
+
+    svg {
+      color: v.$color-accent-pink;
+      transform: rotate(45deg);
+    }
+  }
+
+  &__arrow {
+    color: v.$color-text-secondary;
+  }
+
+  &__divider {
+    width: 1px;
+    height: 16px;
+    background: v.$color-border;
+
+    @include m.respond(mobile) {
+      display: none;
+    }
+  }
+
+  &__date {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: v.$color-text-secondary;
+  }
+}

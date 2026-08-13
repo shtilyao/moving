@@ -1,0 +1,54 @@
+// ==========================================================================
+// Design tokens — палітра з макета
+// ==========================================================================
+
+// Кольори фону
+$color-bg-deepest:  #0D0E14;
+$color-bg-page:     #0D0E14;
+$color-bg-card:      #151821;
+$color-bg-elevated:  #1E2230;
+$color-border:       #2A2F42;
+
+// Акценти
+$color-accent-pink:   #FF7BA3;
+$color-accent-yellow: #FFC75F;
+$color-accent-blue:   #7DD3FC;
+$color-white:         #FFFFFF;
+
+// Текст
+$color-text-primary:   $color-white;
+$color-text-secondary: rgba(255, 255, 255, 0.62);
+$color-text-muted:     rgba(255, 255, 255, 0.4);
+
+// Типографіка
+$font-body: 'Poppins', system-ui, -apple-system, sans-serif;
+$font-hand: 'Caveat', cursive;
+
+$fw-regular:  400;
+$fw-medium:   500;
+$fw-semibold: 600;
+$fw-bold:     700;
+$fw-extrabold:800;
+
+// Розміри контейнера
+$container-max: 1440px;
+$content-max:   1120px;
+
+// Радіуси
+$radius-sm: 10px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-pill: 999px;
+
+// Тіні / скло
+$shadow-card: 0 20px 45px rgba(0, 0, 0, 0.35);
+$glass-bg: rgba(30, 34, 48, 0.55);
+$glass-border: rgba(255, 255, 255, 0.08);
+
+// Точки перелому (breakpoints)
+$bp-desktop: 1200px;
+$bp-tablet:  768px;
+$bp-mobile:  480px;
+
+// Перехід
+$transition-base: 0.25s ease;

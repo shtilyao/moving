@@ -1,0 +1,9 @@
+@use 'variables' as v;
+
+.site-footer {
+  text-align: center;
+  padding: 28px 20px 40px;
+  color: v.$color-text-muted;
+  font-size: 0.85rem;
+  border-top: 1px solid v.$color-border;
+}

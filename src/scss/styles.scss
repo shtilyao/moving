@@ -1,0 +1,13 @@
+// ==========================================================================
+// COUNTDOWN TO BARCELONA — головний файл стилів
+// Структура: variables -> mixins -> base -> header -> hero -> cards -> footer
+// ==========================================================================
+
+@use 'variables';
+@use 'mixins';
+@use 'base';
+@use 'header';
+@use 'hero';
+@use 'cards';
+@use 'interactive';
+@use 'footer';

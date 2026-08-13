@@ -1,0 +1,331 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.card {
+  @include m.glass-card;
+  padding: 24px;
+}
+
+// ---- Секція статистики (прогрес / курс / англійська) ----
+.stats {
+  max-width: v.$container-max;
+  margin: 24px auto 0;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @include m.respond(tablet) {
+    padding: 0 16px;
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+
+  &__title {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: v.$color-text-secondary;
+    font-weight: v.$fw-semibold;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 0.95rem;
+    font-weight: v.$fw-semibold;
+
+    &--pink   { background: rgba(255, 123, 163, 0.16); color: v.$color-accent-pink; }
+    &--blue   { background: rgba(125, 211, 252, 0.16); color: v.$color-accent-blue; }
+    &--yellow { background: rgba(255, 199, 95, 0.16);  color: v.$color-accent-yellow; }
+  }
+
+  &__value {
+    font-size: 1.9rem;
+    font-weight: v.$fw-bold;
+    margin-bottom: 4px;
+  }
+
+  &__of {
+    font-size: 0.9rem;
+    font-weight: v.$fw-regular;
+    color: v.$color-text-secondary;
+  }
+
+  &__meta {
+    font-size: 0.85rem;
+    color: v.$color-text-secondary;
+    margin-bottom: 14px;
+  }
+
+  .progress { margin-top: 14px; }
+}
+
+.progress {
+  position: relative;
+  height: 8px;
+  border-radius: v.$radius-pill;
+  background: v.$color-bg-elevated;
+  overflow: hidden;
+
+  &__bar {
+    position: absolute;
+    inset: 0;
+    width: var(--value, 0%);
+    border-radius: v.$radius-pill;
+    transition: width 1s ease;
+
+    &--pink   { background: linear-gradient(90deg, v.$color-accent-pink, #ff9fbb); }
+    &--blue   { background: linear-gradient(90deg, v.$color-accent-blue, #a7e3ff); }
+    &--yellow { background: linear-gradient(90deg, v.$color-accent-yellow, #ffdd9c); }
+  }
+
+  &__pct {
+    display: block;
+    text-align: right;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: v.$color-text-secondary;
+  }
+}
+
+// ---- Панелі: чек-лист і погода ----
+.panels {
+  max-width: v.$container-max;
+  margin: 20px auto 0;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  @include m.respond(tablet) {
+    padding: 0 16px;
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: start;
+
+  @include m.respond(desktop) {
+    grid-template-columns: 1fr;
+  }
+
+  &__title {
+    grid-column: 1 / -1;
+    font-size: 1rem;
+    font-weight: v.$fw-semibold;
+    margin-bottom: 4px;
+  }
+
+  &__link {
+    font-size: 0.85rem;
+    color: v.$color-accent-blue;
+    font-weight: v.$fw-medium;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    transition: gap v.$transition-base;
+
+    &:hover {
+      gap: 10px;
+    }
+  }
+
+  &__media {
+    align-self: stretch;
+    min-height: 180px;
+    border-radius: v.$radius-md;
+    background-size: cover;
+    background-position: center;
+
+    @include m.respond(desktop) {
+      order: -1;
+      min-height: 140px;
+    }
+
+    &--city {
+      background:
+        linear-gradient(180deg, rgba(20, 16, 26, 0.1), rgba(10, 8, 12, 0.55)),
+        linear-gradient(100deg, #d98a5f 0%, #c96b6b 35%, #8a5a8f 65%, #4a3b6b 100%);
+    }
+
+    &--beach {
+      background:
+        linear-gradient(180deg, rgba(6, 20, 28, 0.05), rgba(4, 14, 20, 0.5)),
+        linear-gradient(160deg, #bfe6f2 0%, #7ec8dc 35%, #3f97b0 65%, #1d5f74 100%);
+    }
+  }
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+
+  &__item label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+    cursor: pointer;
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__box {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 1.5px solid v.$color-border;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background v.$transition-base, border-color v.$transition-base;
+
+    &::after {
+      content: '';
+      width: 10px;
+      height: 6px;
+      border-left: 2px solid v.$color-bg-deepest;
+      border-bottom: 2px solid v.$color-bg-deepest;
+      transform: rotate(-45deg) translateY(-1px);
+      opacity: 0;
+      transition: opacity v.$transition-base;
+    }
+  }
+
+  &__text {
+    font-size: 0.92rem;
+    color: v.$color-text-primary;
+    transition: color v.$transition-base, text-decoration-color v.$transition-base;
+  }
+
+  input:checked + .checklist__box {
+    background: v.$color-accent-pink;
+    border-color: v.$color-accent-pink;
+
+    &::after { opacity: 1; }
+  }
+
+  input:checked ~ .checklist__text {
+    color: v.$color-text-secondary;
+    text-decoration: line-through;
+  }
+
+  input:focus-visible + .checklist__box {
+    @include m.focus-ring;
+  }
+}
+
+.weather {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  &__icon {
+    font-size: 2.4rem;
+    color: v.$color-accent-yellow;
+  }
+
+  &__temp {
+    font-size: 1.9rem;
+    font-weight: v.$fw-bold;
+    line-height: 1;
+  }
+
+  &__desc {
+    margin-top: 4px;
+    font-size: 0.9rem;
+    color: v.$color-text-secondary;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 16px 0;
+    border-top: 1px solid v.$color-border;
+    margin-bottom: 6px;
+  }
+
+  &__label {
+    font-size: 0.72rem;
+    color: v.$color-text-muted;
+    margin-bottom: 4px;
+  }
+
+  &__stat {
+    font-size: 0.9rem;
+    font-weight: v.$fw-semibold;
+  }
+}
+
+// ---- Цитата ----
+.quote {
+  max-width: v.$container-max;
+  margin: 24px auto 60px;
+  padding: 0 40px;
+
+  @include m.respond(tablet) {
+    padding: 0 16px;
+  }
+
+  &__card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 40px;
+
+    @include m.respond(tablet) {
+      padding: 24px;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__mark {
+    font-size: 2.6rem;
+    color: v.$color-accent-pink;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  &__text {
+    flex: 1;
+    font-size: 1.15rem;
+    font-weight: v.$fw-medium;
+
+    @include m.respond(tablet) {
+      font-size: 1rem;
+    }
+  }
+
+  &__heart {
+    color: v.$color-accent-pink;
+    font-size: 1.4rem;
+  }
+}

@@ -1,0 +1,398 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+// ---- Кнопка "увійти / розблоковано" в шапці ----
+.lock-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: v.$radius-pill;
+  background: v.$color-bg-elevated;
+  border: 1px solid v.$color-border;
+  font-size: 0.8rem;
+  font-weight: v.$fw-medium;
+  color: v.$color-text-secondary;
+  transition: border-color v.$transition-base, color v.$transition-base;
+
+  &:hover {
+    color: v.$color-text-primary;
+    border-color: v.$color-accent-blue;
+  }
+
+  &.is-unlocked {
+    color: v.$color-accent-blue;
+    border-color: rgba(125, 211, 252, 0.4);
+    background: rgba(125, 211, 252, 0.08);
+  }
+}
+
+// ---- Кнопка-олівець для редагування картки ----
+.edit-pencil {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: v.$color-bg-elevated;
+  border: 1px solid v.$color-border;
+  color: v.$color-text-secondary;
+  font-size: 0.85rem;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity v.$transition-base, transform v.$transition-base, color v.$transition-base, border-color v.$transition-base;
+
+  &:hover {
+    color: v.$color-accent-blue;
+    border-color: rgba(125, 211, 252, 0.4);
+  }
+}
+
+.card,
+.route,
+.quote__card {
+  position: relative;
+
+  &:hover .edit-pencil,
+  &:focus-within .edit-pencil {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.route {
+  .edit-pencil {
+    position: static;
+    margin-left: 4px;
+    width: 26px;
+    height: 26px;
+    opacity: 0.55;
+
+    @include m.respond(tablet) {
+      opacity: 1;
+    }
+  }
+
+  &:hover .edit-pencil {
+    opacity: 1;
+  }
+}
+
+// Завжди показувати олівці на дотик-пристроях (без hover)
+@media (hover: none) {
+  .edit-pencil {
+    opacity: 0.6;
+    transform: none;
+  }
+}
+
+// ---- Форма додавання пункту чек-листа ----
+.checklist-add {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+
+  input {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: v.$radius-sm;
+    background: v.$color-bg-elevated;
+    border: 1px solid v.$color-border;
+    color: v.$color-text-primary;
+    font-size: 0.88rem;
+
+    &::placeholder {
+      color: v.$color-text-muted;
+    }
+
+    &:focus-visible {
+      @include m.focus-ring;
+    }
+  }
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: v.$radius-sm;
+  font-size: 0.85rem;
+  font-weight: v.$fw-medium;
+  white-space: nowrap;
+  transition: background v.$transition-base, border-color v.$transition-base, opacity v.$transition-base;
+
+  &--small {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+
+  &--primary {
+    background: v.$color-accent-pink;
+    color: #1a0d12;
+
+    &:hover { opacity: 0.9; }
+    &:disabled { opacity: 0.6; cursor: not-allowed; }
+  }
+
+  &--ghost {
+    background: transparent;
+    border: 1px solid v.$color-border;
+    color: v.$color-text-secondary;
+
+    &:hover {
+      color: v.$color-text-primary;
+      border-color: v.$color-text-secondary;
+    }
+  }
+
+  &--danger {
+    background: transparent;
+    color: v.$color-accent-pink;
+    padding: 4px 8px;
+    font-size: 0.78rem;
+  }
+}
+
+// ---- Кнопка видалення пункту чек-листа ----
+.checklist__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  label {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .checklist__remove {
+    flex: none;
+    opacity: 0;
+    transition: opacity v.$transition-base;
+    color: v.$color-text-muted;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 4px 6px;
+
+    &:hover {
+      color: v.$color-accent-pink;
+    }
+  }
+
+  &:hover .checklist__remove,
+  &:focus-within .checklist__remove {
+    opacity: 1;
+  }
+}
+
+@media (hover: none) {
+  .checklist__remove {
+    opacity: 0.5;
+  }
+}
+
+// ---- Toast-повідомлення ----
+.toast-stack {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  pointer-events: none;
+}
+
+.toast {
+  padding: 11px 20px;
+  border-radius: v.$radius-pill;
+  background: v.$color-bg-elevated;
+  border: 1px solid v.$color-border;
+  font-size: 0.85rem;
+  font-weight: v.$fw-medium;
+  color: v.$color-text-primary;
+  box-shadow: v.$shadow-card;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &--success { border-color: rgba(125, 211, 252, 0.5); }
+  &--error   { border-color: rgba(255, 123, 163, 0.6); color: v.$color-accent-pink; }
+}
+
+// ---- Модалка пароля ----
+.pw-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity v.$transition-base, visibility v.$transition-base;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(6, 7, 11, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  &__box {
+    position: relative;
+    width: min(360px, 90vw);
+    padding: 26px;
+    border-radius: v.$radius-lg;
+    background: v.$color-bg-card;
+    border: 1px solid v.$color-border;
+    box-shadow: v.$shadow-card;
+    transform: translateY(10px);
+    transition: transform v.$transition-base;
+  }
+
+  &.is-open &__box {
+    transform: translateY(0);
+  }
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: v.$fw-semibold;
+    margin-bottom: 6px;
+  }
+
+  &__hint {
+    font-size: 0.85rem;
+    color: v.$color-text-secondary;
+    margin-bottom: 16px;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: v.$radius-sm;
+    background: v.$color-bg-elevated;
+    border: 1px solid v.$color-border;
+    color: v.$color-text-primary;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+
+    &:focus-visible {
+      @include m.focus-ring;
+    }
+  }
+
+  &__error {
+    font-size: 0.8rem;
+    color: v.$color-accent-pink;
+    margin-bottom: 10px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 6px;
+  }
+}
+
+// ---- Інлайн-форма редагування картки ----
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+
+  // .edit-form сам задає display:flex, тому браузерне [hidden]{display:none}
+  // програє по каскаду — фіксуємо явно, інакше порожня форма все одно
+  // бере участь у флекс-розкладці батька (напр. .quote__card).
+  &[hidden] {
+    display: none;
+  }
+
+  &__row {
+    display: flex;
+    gap: 10px;
+
+    @include m.respond(mobile) {
+      flex-direction: column;
+    }
+  }
+
+  &__field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__label {
+    font-size: 0.72rem;
+    color: v.$color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  input,
+  textarea {
+    padding: 9px 12px;
+    border-radius: v.$radius-sm;
+    background: v.$color-bg-elevated;
+    border: 1px solid v.$color-border;
+    color: v.$color-text-primary;
+    font-size: 0.9rem;
+    font-family: inherit;
+
+    &:focus-visible {
+      @include m.focus-ring;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+  }
+}
+
+// ---- Слоти форм редагування в конкретних блоках ----
+.hero__content #editSlot-route:not([hidden]) {
+  width: 100%;
+  max-width: 480px;
+  margin-top: 4px;
+}
+
+.quote__card .edit-form {
+  flex-basis: 100%;
+  width: 100%;
+}
+
+.weather ~ .edit-form,
+.weather__grid ~ .edit-form {
+  margin-top: 4px;
+}
+
+
+#syncStatus {
+  &.is-live { color: v.$color-accent-blue; }
+  &.is-error { color: v.$color-accent-pink; }
+}

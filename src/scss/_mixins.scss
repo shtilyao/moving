@@ -1,0 +1,37 @@
+@use 'variables' as v;
+
+// Скляна картка (glassmorphism)
+@mixin glass-card {
+  background: linear-gradient(180deg, rgba(30, 34, 48, 0.7), rgba(21, 24, 33, 0.7));
+  border: 1px solid v.$glass-border;
+  border-radius: v.$radius-lg;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: v.$shadow-card;
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == desktop {
+    @media (max-width: v.$bp-desktop) { @content; }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: v.$bp-tablet) { @content; }
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: v.$bp-mobile) { @content; }
+  }
+}
+
+@mixin focus-ring {
+  outline: 2px solid v.$color-accent-blue;
+  outline-offset: 3px;
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
