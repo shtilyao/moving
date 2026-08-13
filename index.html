@@ -7,12 +7,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/moving/assets/index-COLnE9YX.js"></script>
-  <link rel="stylesheet" crossorigin href="/moving/assets/index-CaNUJEAt.css">
+  <script type="module" crossorigin src="/moving/assets/index-DBw7BihY.js"></script>
+  <link rel="stylesheet" crossorigin href="/moving/assets/index-CKXJAAvo.css">
 </head>
 <body>
-<!-- ===== HEADER ===== -->
 
+<!-- ===== HEADER ===== -->
 <header class="site-header">
   <div class="site-header__inner">
     <a href="#home" class="logo">
@@ -176,7 +176,7 @@
       <h3 class="panel__title">Погода в Барселоні</h3>
 
       <div class="weather">
-        <span class="weather__icon">☀</span>
+        <span class="weather__icon" id="weatherIcon">☀</span>
         <div>
           <p class="weather__temp"><span id="weatherTemp">—</span>°C</p>
           <p class="weather__desc" id="weatherDesc">—</p>
@@ -198,8 +198,7 @@
         </div>
       </div>
 
-      <button class="edit-pencil" data-edit="weather" title="Редагувати погоду">✎</button>
-      <div class="edit-form" id="editSlot-weather" hidden></div>
+      <p class="weather__updated" id="weatherUpdated">Оновлення…</p>
 
       <div class="panel__media panel__media--beach" aria-hidden="true"></div>
     </article>
