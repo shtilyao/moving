@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/moving/assets/index-sk8EJcOe.js"></script>
-  <link rel="stylesheet" crossorigin href="/moving/assets/index-CKXJAAvo.css">
+  <script type="module" crossorigin src="/moving/assets/index-DVOLqdpi.js"></script>
+  <link rel="stylesheet" crossorigin href="/moving/assets/index-D8fjxNM8.css">
 </head>
 <body>
 
@@ -110,6 +110,59 @@
     </div>
   </section>
 
+
+
+  <!-- ===== CHECKLIST + WEATHER ===== -->
+  <section class="panels" id="plan">
+    <article class="card panel" id="checklist">
+      <h3 class="panel__title">Чек-лист переїзду</h3>
+
+      <div class="panel__content">
+        <ul class="checklist" id="checklistItems"></ul>
+
+        <form class="checklist-add" id="checklistAddForm">
+          <input type="text" id="checklistAddInput" placeholder="Додати пункт…" maxlength="80" autocomplete="off">
+          <button type="submit" class="btn btn--small">+ Додати</button>
+        </form>
+      </div>
+
+      <div class="panel__media panel__media--city" aria-hidden="true"></div>
+    </article>
+
+    <article class="card panel">
+      <h3 class="panel__title">Погода в Барселоні</h3>
+
+      <div class="panel__content">
+        <div class="weather">
+          <span class="weather__icon" id="weatherIcon">☀</span>
+          <div>
+            <p class="weather__temp"><span id="weatherTemp">—</span>°C</p>
+            <p class="weather__desc" id="weatherDesc">—</p>
+          </div>
+        </div>
+
+        <div class="weather__grid">
+          <div>
+            <p class="weather__label">Вологість</p>
+            <p class="weather__stat"><span id="weatherHumidity">—</span>%</p>
+          </div>
+          <div>
+            <p class="weather__label">Вітер</p>
+            <p class="weather__stat"><span id="weatherWind">—</span> км/год</p>
+          </div>
+          <div>
+            <p class="weather__label">Відчувається як</p>
+            <p class="weather__stat"><span id="weatherFeels">—</span>°C</p>
+          </div>
+        </div>
+
+        <p class="weather__updated" id="weatherUpdated">Оновлення…</p>
+      </div>
+
+      <div class="panel__media panel__media--beach" aria-hidden="true"></div>
+    </article>
+  </section>
+
   <!-- ===== STAT CARDS ===== -->
   <section class="stats" id="goals">
     <article class="card stat-card">
@@ -154,53 +207,6 @@
       </div>
       <button class="edit-pencil" data-edit="english" title="Редагувати англійську">✎</button>
       <div class="edit-form" id="editSlot-english" hidden></div>
-    </article>
-  </section>
-
-  <!-- ===== CHECKLIST + WEATHER ===== -->
-  <section class="panels" id="plan">
-    <article class="card panel" id="checklist">
-      <h3 class="panel__title">Чек-лист переїзду</h3>
-
-      <ul class="checklist" id="checklistItems"></ul>
-
-      <form class="checklist-add" id="checklistAddForm">
-        <input type="text" id="checklistAddInput" placeholder="Додати пункт…" maxlength="80" autocomplete="off">
-        <button type="submit" class="btn btn--small">+ Додати</button>
-      </form>
-
-      <div class="panel__media panel__media--city" aria-hidden="true"></div>
-    </article>
-
-    <article class="card panel">
-      <h3 class="panel__title">Погода в Барселоні</h3>
-
-      <div class="weather">
-        <span class="weather__icon" id="weatherIcon">☀</span>
-        <div>
-          <p class="weather__temp"><span id="weatherTemp">—</span>°C</p>
-          <p class="weather__desc" id="weatherDesc">—</p>
-        </div>
-      </div>
-
-      <div class="weather__grid">
-        <div>
-          <p class="weather__label">Вологість</p>
-          <p class="weather__stat"><span id="weatherHumidity">—</span>%</p>
-        </div>
-        <div>
-          <p class="weather__label">Вітер</p>
-          <p class="weather__stat"><span id="weatherWind">—</span> км/год</p>
-        </div>
-        <div>
-          <p class="weather__label">Відчувається як</p>
-          <p class="weather__stat"><span id="weatherFeels">—</span>°C</p>
-        </div>
-      </div>
-
-      <p class="weather__updated" id="weatherUpdated">Оновлення…</p>
-
-      <div class="panel__media panel__media--beach" aria-hidden="true"></div>
     </article>
   </section>
 
