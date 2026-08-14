@@ -19,7 +19,7 @@
   @include m.respond(tablet) {
     width: 100%;
     max-width: none;
-    padding: 0 12px;
+    padding: 0;
     grid-template-columns: 1fr;
   }
 }
@@ -153,7 +153,7 @@
   @include m.respond(tablet) {
     width: 100%;
     max-width: none;
-    padding: 0 12px;
+    padding: 0;
     grid-template-columns: 1fr;
   }
 }
@@ -162,6 +162,8 @@
   position: relative;
   overflow: hidden;
   min-height: 260px;
+  min-width: 0;
+  width: 100%;
 
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -268,22 +270,24 @@
   // На планшете/мобильном фото остаётся фоном,
   // но начинаем его немного ниже заголовка.
   @include m.respond(tablet) {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
 
-    grid-template-areas:
-      'title'
-      'content';
+  grid-template-areas:
+    'title'
+    'content';
 
-    height: auto;
-    min-height: 220px;
+  height: auto;
+  min-height: 320px;
 
-    &__media {
-      inset: 0;
-      top: 0;
-      height: 100%;
-    }
+  &__media {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
   }
+}
 }
 
 // ---- Чек-лист ----
@@ -293,6 +297,8 @@
   flex-direction: column;
   gap: 4px;
   margin-bottom: 12px;
+  width: 100%;
+  min-width: 0;
 
   &__item label {
     display: flex;
@@ -431,7 +437,7 @@
   @include m.respond(tablet) {
     width: 100%;
     max-width: none;
-    padding: 0 12px;
+    padding: 0;
   }
 
   &__card {
