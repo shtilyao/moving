@@ -20,6 +20,13 @@ body {
   font-weight: v.$fw-regular;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+main {
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 h1, h2, h3, p, ul, figure {

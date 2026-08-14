@@ -12,6 +12,7 @@
   border-bottom: 1px solid v.$color-border;
 
   &__inner {
+    width: 100%;
     max-width: v.$container-max;
     margin: 0 auto;
     padding: 18px 40px;
@@ -20,7 +21,9 @@
     gap: 32px;
 
     @include m.respond(tablet) {
-      padding: 16px 20px;
+      width: 100%;
+      max-width: none;
+      padding: 16px 12px;
     }
   }
 }
@@ -83,22 +86,23 @@
   @include m.respond(tablet) {
     position: fixed;
     top: 61px;
-    left: 0;
-    right: 0;
+    left: 50%;
+    width: min(100%, calc(v.$container-max - 32px));
+    transform: translateX(-50%) translateY(-8px);
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
     padding: 12px 20px 20px;
     background: v.$color-bg-card;
-    border-bottom: 1px solid v.$color-border;
-    transform: translateY(-8px);
+    border: 1px solid v.$color-border;
+    border-radius: 0 0 18px 18px;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     transition: opacity v.$transition-base, transform v.$transition-base, visibility v.$transition-base;
 
     &.is-open {
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
       opacity: 1;
       visibility: visible;
       pointer-events: auto;

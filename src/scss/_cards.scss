@@ -8,6 +8,7 @@
 
 // ---- Секція статистики (прогрес / курс / англійська) ----
 .stats {
+  width: 100%;
   max-width: v.$container-max;
   margin: 24px auto 0;
   padding: 0 40px;
@@ -16,7 +17,9 @@
   gap: 20px;
 
   @include m.respond(tablet) {
-    padding: 0 16px;
+    width: 100%;
+    max-width: none;
+    padding: 0 12px;
     grid-template-columns: 1fr;
   }
 }
@@ -47,9 +50,20 @@
     font-size: 0.95rem;
     font-weight: v.$fw-semibold;
 
-    &--pink   { background: rgba(255, 123, 163, 0.16); color: v.$color-accent-pink; }
-    &--blue   { background: rgba(125, 211, 252, 0.16); color: v.$color-accent-blue; }
-    &--yellow { background: rgba(255, 199, 95, 0.16);  color: v.$color-accent-yellow; }
+    &--pink {
+      background: rgba(255, 123, 163, 0.16);
+      color: v.$color-accent-pink;
+    }
+
+    &--blue {
+      background: rgba(125, 211, 252, 0.16);
+      color: v.$color-accent-blue;
+    }
+
+    &--yellow {
+      background: rgba(255, 199, 95, 0.16);
+      color: v.$color-accent-yellow;
+    }
   }
 
   &__value {
@@ -70,7 +84,9 @@
     margin-bottom: 14px;
   }
 
-  .progress { margin-top: 14px; }
+  .progress {
+    margin-top: 14px;
+  }
 }
 
 .progress {
@@ -87,9 +103,29 @@
     border-radius: v.$radius-pill;
     transition: width 1s ease;
 
-    &--pink   { background: linear-gradient(90deg, v.$color-accent-pink, #ff9fbb); }
-    &--blue   { background: linear-gradient(90deg, v.$color-accent-blue, #a7e3ff); }
-    &--yellow { background: linear-gradient(90deg, v.$color-accent-yellow, #ffdd9c); }
+    &--pink {
+      background: linear-gradient(
+        90deg,
+        v.$color-accent-pink,
+        #ff9fbb
+      );
+    }
+
+    &--blue {
+      background: linear-gradient(
+        90deg,
+        v.$color-accent-blue,
+        #a7e3ff
+      );
+    }
+
+    &--yellow {
+      background: linear-gradient(
+        90deg,
+        v.$color-accent-yellow,
+        #ffdd9c
+      );
+    }
   }
 
   &__pct {
@@ -102,45 +138,81 @@
 }
 
 // ---- Панелі: чек-лист і погода ----
+
 .panels {
+  width: 100%;
   max-width: v.$container-max;
   margin: 20px auto 0;
   padding: 0 40px;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  align-items: stretch;
 
   @include m.respond(tablet) {
-    padding: 0 16px;
+    width: 100%;
+    max-width: none;
+    padding: 0 12px;
     grid-template-columns: 1fr;
   }
 }
 
 .panel {
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 24px;
-  align-items: start;
+  grid-template-rows: auto 1fr;
+  align-items: stretch;
 
-  @include m.respond(desktop) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-areas:
+    'title title'
+    'content media';
 
+  column-gap: 24px;
+  row-gap: 16px;
+
+  height: 100%;
+
+  // Контент находится поверх изображения
   &__title {
-    grid-column: 1 / -1;
+    grid-area: title;
+
+    position: relative;
+    z-index: 2;
+
     font-size: 1rem;
     font-weight: v.$fw-semibold;
     margin-bottom: 4px;
+  }
+
+  &__content {
+    grid-area: content;
+
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    height: 100%;
   }
 
   &__link {
     font-size: 0.85rem;
     color: v.$color-accent-blue;
     font-weight: v.$fw-medium;
+
     display: inline-flex;
     align-items: center;
     gap: 6px;
+
     margin-top: 4px;
+
     transition: gap v.$transition-base;
 
     &:hover {
@@ -148,31 +220,73 @@
     }
   }
 
+  // Медиа теперь НЕ является частью grid.
+  // Это фоновый слой всей карточки.
   &__media {
-    align-self: stretch;
-    min-height: 180px;
-    border-radius: v.$radius-md;
-    background-size: cover;
-    background-position: center;
+    position: absolute;
+    inset: 0;
 
-    @include m.respond(desktop) {
-      order: -1;
-      min-height: 140px;
-    }
+    z-index: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-origin: border-box;
+
+    pointer-events: none;
 
     &--city {
-      background:
-        linear-gradient(180deg, rgba(20, 16, 26, 0.1), rgba(10, 8, 12, 0.55)),
-        linear-gradient(100deg, #d98a5f 0%, #c96b6b 35%, #8a5a8f 65%, #4a3b6b 100%);
+      background-image: url('../img/checklist.png');
     }
 
     &--beach {
-      background:
-        linear-gradient(180deg, rgba(6, 20, 28, 0.05), rgba(4, 14, 20, 0.5)),
-        linear-gradient(160deg, #bfe6f2 0%, #7ec8dc 35%, #3f97b0 65%, #1d5f74 100%);
+      background-image: url('../img/weather.png');
+    }
+
+    // Плавное растворение фотографии
+    &--city::after,
+    &--beach::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+
+      background: linear-gradient(
+        to bottom,
+        rgba(21, 24, 33, 0) 0%,
+        rgba(21, 24, 33, 0.05) 20%,
+        rgba(21, 24, 33, 0.25) 40%,
+        rgba(21, 24, 33, 0.55) 58%,
+        rgba(21, 24, 33, 0.82) 75%,
+        #151821 100%
+      );
+    }
+  }
+
+  // На планшете/мобильном фото остаётся фоном,
+  // но начинаем его немного ниже заголовка.
+  @include m.respond(tablet) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+
+    grid-template-areas:
+      'title'
+      'content';
+
+    height: auto;
+    min-height: 220px;
+
+    &__media {
+      inset: 0;
+      top: 0;
+      height: 100%;
     }
   }
 }
+
+// ---- Чек-лист ----
 
 .checklist {
   display: flex;
@@ -197,23 +311,34 @@
 
   &__box {
     flex: none;
+
     width: 20px;
     height: 20px;
+
     border-radius: 6px;
     border: 1.5px solid v.$color-border;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background v.$transition-base, border-color v.$transition-base;
+
+    transition:
+      background v.$transition-base,
+      border-color v.$transition-base;
 
     &::after {
       content: '';
+
       width: 10px;
       height: 6px;
+
       border-left: 2px solid v.$color-bg-deepest;
       border-bottom: 2px solid v.$color-bg-deepest;
+
       transform: rotate(-45deg) translateY(-1px);
+
       opacity: 0;
+
       transition: opacity v.$transition-base;
     }
   }
@@ -221,14 +346,19 @@
   &__text {
     font-size: 0.92rem;
     color: v.$color-text-primary;
-    transition: color v.$transition-base, text-decoration-color v.$transition-base;
+
+    transition:
+      color v.$transition-base,
+      text-decoration-color v.$transition-base;
   }
 
   input:checked + .checklist__box {
     background: v.$color-accent-pink;
     border-color: v.$color-accent-pink;
 
-    &::after { opacity: 1; }
+    &::after {
+      opacity: 1;
+    }
   }
 
   input:checked ~ .checklist__text {
@@ -240,6 +370,8 @@
     @include m.focus-ring;
   }
 }
+
+// ---- Погода ----
 
 .weather {
   display: flex;
@@ -268,8 +400,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
+
     padding: 16px 0;
+
     border-top: 1px solid v.$color-border;
+
     margin-bottom: 6px;
   }
 
@@ -286,19 +421,25 @@
 }
 
 // ---- Цитата ----
+
 .quote {
+  width: 100%;
   max-width: v.$container-max;
   margin: 24px auto 60px;
   padding: 0 40px;
 
   @include m.respond(tablet) {
-    padding: 0 16px;
+    width: 100%;
+    max-width: none;
+    padding: 0 12px;
   }
 
   &__card {
     display: flex;
     align-items: center;
     gap: 20px;
+    min-height: 100%;
+
     padding: 30px 40px;
 
     @include m.respond(tablet) {
@@ -329,3 +470,4 @@
     font-size: 1.4rem;
   }
 }
+

@@ -98,6 +98,7 @@
 
   input {
     flex: 1;
+    min-width: 0; // без цього input відмовляється стискатись і вилазить за межі колонки
     padding: 10px 12px;
     border-radius: v.$radius-sm;
     background: v.$color-bg-elevated;
@@ -390,7 +391,6 @@
 .weather__grid ~ .edit-form {
   margin-top: 4px;
 }
-
 
 #syncStatus {
   &.is-live { color: v.$color-accent-blue; }
